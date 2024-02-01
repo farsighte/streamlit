@@ -1,10 +1,10 @@
 import streamlit as st
 
 # 상단 바에 제목을 설정합니다.
-st.title("나의 Streamlit 앱")
+st.title("다온 기획사")
 
 # 상단 바에 메뉴를 추가할 수 있습니다.
-menu = ["홈", "페이지1", "페이지2", "페이지3"]
+menu = ["홈", "회사소개", "아몰랑", "니가해"]
 choice = st.sidebar.selectbox("메뉴", menu)
 
 # 선택한 메뉴에 따라 다른 내용을 표시할 수 있습니다.
