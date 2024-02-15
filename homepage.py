@@ -1,38 +1,40 @@
 import streamlit as st
 import base64
-image_file={'main':"https://github.com/farsighte/streamlit/blob/image/page/main/1.jpg" ,
-            'page_1':"https://github.com/farsighte/streamlit/blob/image/page/page_1/1.jpg" ,
-            'page_2':"https://github.com/farsighte/streamlit/blob/image/page/page_2/1.jpg" ,
-            'sidebar':"https://github.com/farsighte/streamlit/blob/image/sidebar/1.jpg" ,}
 
-def get_image_as_base64(path):
-    with open(path, "rb") as image_file:
-        encoded = base64.b64encode(image_file.read()).decode()
+image_file = {
+    'main': "https://github.com/farsighte/streamlit/blob/image/page/main/1.jpg",
+    'page_1': "https://github.com/farsighte/streamlit/blob/image/page/page_1/1.jpg",
+    'page_2': "https://github.com/farsighte/streamlit/blob/image/page/page_2/1.jpg",
+    'sidebar': "https://github.com/farsighte/streamlit/blob/image/sidebar/1.jpg",
+}
+
+def get_image_as_base64(url):
+    # 이미지 파일을 바이너리로 읽어와 base64로 인코딩
+    encoded = base64.b64encode(requests.get(url).content).decode('utf-8')
     return "data:image/jpeg;base64," + encoded
 
-
-def  background_image(text):
-     kkkaa = get_image_as_base64(text)
-     st.markdown(
-                 f"""
-                 <style>
-                 .stApp {{
-                 background-image: url({kkkaa});
-                 background-size: cover;
-                                              }}
-                 </style>
-                  """,
-                 unsafe_allow_html=True  )
-
+def background_image(url):
+    kkkaa = get_image_as_base64(url)
+    st.markdown(
+        f"""
+        <style>
+            .stApp {{
+                background-image: url({kkkaa});
+                background-size: cover;
+            }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 def main_page():
-    background_image(image_file['main'])    
+    background_image(image_file['main'])
+
 def page_1():
     background_image(image_file['page_1'])
-def page_2():    
+
+def page_2():
     background_image(image_file['page_2'])
-
-
 
 # 초기화
 if "page" not in st.session_state:
@@ -52,4 +54,4 @@ if st.session_state.page == 'main':
 elif st.session_state.page == 'page_1':
     page_1()
 elif st.session_state.page == 'page_2':
-    page_2()    
+    page_2()
