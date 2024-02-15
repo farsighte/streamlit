@@ -1,19 +1,55 @@
 import streamlit as st
+import base64
+image_file={'main':"https://github.com/farsighte/streamlit/blob/image/page/main/1.jpg" ,
+            'page_1':"https://github.com/farsighte/streamlit/blob/image/page/page_1/1.jpg" ,
+            'page_2':"https://github.com/farsighte/streamlit/blob/image/page/page_2/1.jpg" ,
+            'sidebar':"https://github.com/farsighte/streamlit/blob/image/sidebar/1.jpg" ,}
 
-# 상단 바에 제목을 설정합니다.
-st.title("다온 기획사")
+def get_image_as_base64(path):
+    with open(path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode()
+    return "data:image/jpeg;base64," + encoded
 
-# 상단 바에 메뉴를 추가할 수 있습니다.
-menu = ["홈", "회사소개", "아몰랑", "니가해"]
-choice = st.sidebar.selectbox("메뉴", menu)
 
-# 선택한 메뉴에 따라 다른 내용을 표시할 수 있습니다.
-if choice == "홈":
-    st.write("이곳은 홈 페이지입니다.")
-elif choice == "페이지1":
-    st.write("이곳은 페이지 1입니다.")
-elif choice == "페이지2":
-    st.write("이곳은 페이지 2입니다.")
-elif choice == "페이지3":
-    st.write("이곳은 페이지 3입니다.")
+def  background_image(text):
+     kkkaa = get_image_as_base64(text)
+     st.markdown(
+                 f"""
+                 <style>
+                 .stApp {{
+                 background-image: url({kkkaa});
+                 background-size: cover;
+                                              }}
+                 </style>
+                  """,
+                 unsafe_allow_html=True  )
 
+
+def main_page():
+    background_image(image_file['main'])    
+def page_1():
+    background_image(image_file['page_1'])
+def page_2():    
+    background_image(image_file['page_2'])
+
+
+
+# 초기화
+if "page" not in st.session_state:
+    st.session_state.page = 'main'
+
+# 페이지 이동 버튼
+if st.sidebar.button("메인 페이지"):
+    st.session_state.page = 'main'
+if st.sidebar.button("페이지 1"):
+    st.session_state.page = 'page_1'
+if st.sidebar.button("페이지 2"):
+    st.session_state.page = 'page_2'
+
+# 페이지 전환
+if st.session_state.page == 'main':
+    main_page()
+elif st.session_state.page == 'page_1':
+    page_1()
+elif st.session_state.page == 'page_2':
+    page_2()    
