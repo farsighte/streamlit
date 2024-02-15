@@ -2,10 +2,10 @@ import streamlit as st
 import base64
 
 image_file = {
-    'main': "https://github.com/farsighte/streamlit/blob/image/page/main/1.jpg",
-    'page_1': "https://github.com/farsighte/streamlit/blob/image/page/page_1/1.jpg",
-    'page_2': "https://github.com/farsighte/streamlit/blob/image/page/page_2/1.jpg",
-    'sidebar': "https://github.com/farsighte/streamlit/blob/image/sidebar/1.jpg",
+    'main': "image/page/main/1.jpg",
+    'page_1': "image/page/page_1/1.jpg",
+    'page_2': "image/page/page_2/1.jpg",
+    'sidebar': image/sidebar/1.jpg",
 }
 
 def get_image_as_base64(url):
