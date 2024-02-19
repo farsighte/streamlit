@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 import requests  # 이 부분을 추가
+# 아 쓰벌 이게 추가됫다
 
 image_file = {
     'main': "image/page/main/1.jpg",
