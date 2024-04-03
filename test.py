@@ -16,7 +16,7 @@ def apply_custom_styles():
           
         /* 전체 페이지 배경 이미지 설정 */
         [data-testid="stAppViewContainer"] {{
-        
+            background-color: rgba(0,0,0,0)
             background-size: cover;
             background-attachment: fixed;
         }}
